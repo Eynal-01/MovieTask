@@ -16,27 +16,28 @@ namespace MovieTask.Services.Concrete
 
         public void Add(Movie entity)
         {
-            throw new NotImplementedException();
+            _movieRepository.Add(entity);
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var item = _movieRepository.Get(s => s.Id == id);
+            _movieRepository.Delete(item);
         }
 
         public Movie Get(Expression<Func<Movie, bool>> expression)
         {
-            throw new NotImplementedException();
+            return _movieRepository.Get(expression);
         }
 
         public IEnumerable<Movie> GetAll()
         {
-            throw new NotImplementedException();
+            return _movieRepository.GetAll();
         }
 
         public void Update(Movie entity)
         {
-            throw new NotImplementedException();
+            _movieRepository.Update(entity);
         }
     }
 }

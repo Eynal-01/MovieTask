@@ -16,27 +16,32 @@ namespace MovieTask.Repositories.Concrete
 
         public void Add(Movie entity)
         {
-            throw new NotImplementedException();
+           _context.Movies.Add(entity); 
+            _context.SaveChanges();
         }
 
         public void Delete(Movie entity)
         {
-            throw new NotImplementedException();
+            _context.Movies.Remove(entity);
+            _context.SaveChanges();
         }
 
         public Movie Get(Expression<Func<Movie, bool>> expression)
         {
-            throw new NotImplementedException();
+            var movie = _context.Movies.SingleOrDefault(expression);
+            return movie;
         }
 
         public IEnumerable<Movie> GetAll()
         {
-            throw new NotImplementedException();
+            var movies = _context.Movies;
+            return movies;
         }
 
         public void Update(Movie entity)
         {
-            throw new NotImplementedException();
+            _context.Movies.Update(entity);
+            _context.SaveChanges();
         }
     }
 }

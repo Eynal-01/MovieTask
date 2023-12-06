@@ -14,5 +14,10 @@ namespace MovieTask.Controllers
         {
             _movieService = movieService;
         }
+
+
+        HttpClient httpClient = new HttpClient();
+        HttpResponseMessage response = new HttpResponseMessage();
+
     }
 }
