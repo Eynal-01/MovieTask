@@ -18,6 +18,7 @@ public class BackgroundWorkerService : BackgroundService
             var minute = int.Parse(_configuration["Time:minute"]);
             _logger.LogInformation("Worker running at : {time}", DateTimeOffset.Now);
             await Task.Delay(minute*1000, stoppingToken);
+
         }
     }
 }

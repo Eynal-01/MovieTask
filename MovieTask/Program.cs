@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using MovieTask.Data;
 using MovieTask.Repositories.Abstract;
 using MovieTask.Repositories.Concrete;
+using MovieTask.Services;
 using MovieTask.Services.Abstract;
 using MovieTask.Services.Concrete;
 
