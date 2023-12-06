@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MovieTask.Services.Abstract;
+using MovieTask.Services.Concrete;
 
 namespace MovieTask.Controllers
 {
@@ -8,16 +9,18 @@ namespace MovieTask.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly IMovieService _movieService;
+        private readonly GetMovieService getMovieService;
 
-        public MovieController(IMovieService movieService)
+        public MovieController(GetMovieService getMovieService)
         {
-            _movieService = movieService;
+            this.getMovieService = getMovieService;
         }
 
-
-        HttpClient httpClient = new HttpClient();
-        HttpResponseMessage response = new HttpResponseMessage();
-
+        [HttpGet]
+        public IActionResult Get()
+        {
+            getMovieService.GetMovieFromApi();
+            return Ok();
+        }
     }
 }
