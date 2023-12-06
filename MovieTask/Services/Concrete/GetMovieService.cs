@@ -1,4 +1,6 @@
-﻿using MovieTask.Services.Abstract;
+﻿using MovieTask.Entities;
+using MovieTask.Services.Abstract;
+using System.Text.Json;
 
 namespace MovieTask.Services.Concrete
 {
@@ -27,6 +29,8 @@ namespace MovieTask.Services.Concrete
             if (response.IsSuccessStatusCode)
             {
                 var content = await response.Content.ReadAsStringAsync();
+                var movieInfo = JsonSerializer.Deserialize<Movie>(content);
+              
             }
             else
             {

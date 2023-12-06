@@ -11,18 +11,6 @@ public class BackgroundWorkerService : BackgroundService
         _configuration = configuration; 
     }
 
-    //public async Task StartAsync(CancellationToken cancellationToken)
-    //{
-    //    _logger.LogInformation("Service started.");
-       
-    //}
-
-    //public Task StopAsync(CancellationToken cancellationToken)
-    //{
-    //    _logger.LogInformation("Service stopped.");
-    //    return Task.CompletedTask;
-    //}
-
     protected async override Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
