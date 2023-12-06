@@ -10,17 +10,27 @@ namespace MovieTask.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private readonly GetMovieService getMovieService;
+        private readonly GetMovieService movieGetService;
+        private readonly IMovieService _movieService;
+        private readonly BackgroundWorkerService backgroundWorkerService;
 
-        public MovieController(GetMovieService getMovieService)
+        public MovieController(GetMovieService movieGetServices, IMovieService movieService, BackgroundWorkerService backgroundWorkerService)
         {
-            this.getMovieService = getMovieService;
+            movieGetService = movieGetServices;
+            _movieService = movieService;
+            this.backgroundWorkerService = backgroundWorkerService;
+
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> GetAsync()
         {
-            getMovieService.GetMovieFromApi();
+            var result = await movieGetService.GetMovieFromApi();
+            var movie = _movieService.GetAll().FirstOrDefault(m => m.Title == result.Title);
+            if (movie == null)
+            {
+                _movieService.Add(result);
+            }
             return Ok();
         }
     }
