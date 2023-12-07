@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MovieTask.Controllers;
 using MovieTask.Data;
 using MovieTask.Repositories.Abstract;
 using MovieTask.Repositories.Concrete;
@@ -15,10 +16,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddHostedService<BackgroundWorkerService>();
 builder.Services.AddScoped<IMovieRepository, MovieRepository>();
 builder.Services.AddScoped<IMovieService, MovieService>();
 builder.Services.AddScoped<GetMovieService>();
-builder.Services.AddHostedService<BackgroundWorkerService>();
+builder.Services.AddScoped<MovieController>();      
 
 var connection = builder.Configuration.GetConnectionString("myconn");
 builder.Services.AddDbContext<MovieDbContext>(opt =>
@@ -33,7 +35,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
 }
 
 app.UseHttpsRedirection();

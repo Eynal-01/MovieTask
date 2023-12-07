@@ -12,13 +12,13 @@ namespace MovieTask.Controllers
     {
         private readonly GetMovieService movieGetService;
         private readonly IMovieService _movieService;
-        private readonly BackgroundWorkerService backgroundWorkerService;
+        //private readonly BackgroundWorkerService backgroundWorkerService;
 
-        public MovieController(GetMovieService movieGetServices, IMovieService movieService, BackgroundWorkerService backgroundWorkerService)
+        public MovieController(GetMovieService movieGetServices, IMovieService movieService/*, BackgroundWorkerService backgroundWorkerService*/)
         {
             movieGetService = movieGetServices;
             _movieService = movieService;
-            this.backgroundWorkerService = backgroundWorkerService;
+            //this.backgroundWorkerService = backgroundWorkerService;
 
         }
 

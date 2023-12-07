@@ -8,7 +8,6 @@ namespace MovieTask.Data
         public MovieDbContext(DbContextOptions<MovieDbContext> options)
             :base(options)
         {
-            
         }
 
         public DbSet<Movie> Movies { get; set; }        
