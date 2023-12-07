@@ -31,45 +31,48 @@ using System.Threading;
 
 public class BackgroundWorkerService : BackgroundService
 {
-    private readonly GetMovieService _movieGetService;
-    private readonly IMovieService _movieService;
+    private readonly IConfiguration _configuration;
+    //private readonly GetMovieService _movieGetService;
+    //private readonly IMovieService _movieService;
     private readonly ILogger<BackgroundWorkerService> _logger;
 
     public BackgroundWorkerService(
-        GetMovieService movieGetService,
-        IMovieService movieService,
-        ILogger<BackgroundWorkerService> logger)
+        //GetMovieService movieGetService,
+        //IMovieService movieService,
+        ILogger<BackgroundWorkerService> logger,
+        IConfiguration configuration)
     {
-        _movieGetService = movieGetService;
-        _movieService = movieService;
+        //_movieGetService = movieGetService;
+        //_movieService = movieService;
         _logger = logger;
+        _configuration = configuration;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
         {
-            await GetAndProcessMovieAsync();
-
-            // Wait for 10 seconds
-            await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+            var minute = int.Parse(_configuration["Time:minute"]);
+            //await GetAndProcessMovieAsync();
+            _logger.LogInformation("Worker running at : {time}", DateTimeOffset.Now);
+            await Task.Delay(minute*1000, stoppingToken);
         }
     }
 
-    private async Task GetAndProcessMovieAsync()
-    {
-        var result = await _movieGetService.GetMovieFromApi();
-        var movie = _movieService.GetAll().FirstOrDefault(m => m.Title == result.Title);
+    //private async Task GetAndProcessMovieAsync()
+    //{
+    //    var result = await _movieGetService.GetMovieFromApi();
+    //    var movie = _movieService.GetAll().FirstOrDefault(m => m.Title == result.Title);
 
-        if (movie == null)
-        {
-            _movieService.Add(result);
-            _logger.LogInformation("New movie added: {Title}", result.Title);
-        }
-        else
-        {
-            _logger.LogInformation("Movie already exists: {Title}", result.Title);
-        }
-    }
+    //    if (movie == null)
+    //    {
+    //        _movieService.Add(result);
+    //        _logger.LogInformation("New movie added: {Title}", result.Title);
+    //    }
+    //    else
+    //    {
+    //        _logger.LogInformation("Movie already exists: {Title}", result.Title);
+    //    }
+    //}
 }
 
