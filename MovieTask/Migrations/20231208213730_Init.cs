@@ -15,7 +15,7 @@ namespace MovieTask.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Year = table.Column<int>(type: "int", nullable: false),
+                    Year = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RunTime = table.Column<int>(type: "int", nullable: false),
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Director = table.Column<string>(type: "nvarchar(max)", nullable: true)

@@ -5,15 +5,17 @@ using System.Text.Json;
 
 namespace MovieTask.Services
 {
-    public class GetMovieService
+    public class GetMovieService : IGetMovieService
     {
         private readonly HttpClient httpClient;
         private readonly Random random;
+        private readonly IMovieService _movieService;
 
-        public GetMovieService()
+        public GetMovieService(IMovieService movieService)
         {
             httpClient = new HttpClient();
             random = new Random();
+            _movieService = movieService;
         }
 
         public async Task<Movie> GetMovieFromApi()
@@ -29,6 +31,7 @@ namespace MovieTask.Services
             {
                 var content = await response.Content.ReadAsStringAsync();
                 var movieInfo = JsonSerializer.Deserialize<Movie>(content);
+                _movieService.Add(movieInfo);
                 return movieInfo;
             }
             else

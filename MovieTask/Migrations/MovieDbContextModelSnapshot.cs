@@ -41,8 +41,8 @@ namespace MovieTask.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
+                    b.Property<string>("Year")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

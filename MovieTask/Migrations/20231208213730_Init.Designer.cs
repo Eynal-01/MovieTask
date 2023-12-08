@@ -11,7 +11,7 @@ using MovieTask.Data;
 namespace MovieTask.Migrations
 {
     [DbContext(typeof(MovieDbContext))]
-    [Migration("20231206064206_Init")]
+    [Migration("20231208213730_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,8 +43,8 @@ namespace MovieTask.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
+                    b.Property<string>("Year")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
